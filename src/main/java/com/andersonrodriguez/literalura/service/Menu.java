@@ -46,6 +46,6 @@ public class Menu {
 
     public String mostrarMenuBusquedaTitulo() {
         System.out.println("Ingrese el titulo que desea Buscar");
-        return scanner.nextLine();
+        return scanner.nextLine().trim().toLowerCase();
     }
 }

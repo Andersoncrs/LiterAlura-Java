@@ -1,5 +1,6 @@
 package com.andersonrodriguez.literalura;
 
+import com.andersonrodriguez.literalura.service.ConsumoApi;
 import com.andersonrodriguez.literalura.service.Menu;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -24,6 +25,8 @@ public class LiteraluraApplication implements CommandLineRunner {
 			switch (opcionIngresada){
 				case 1 -> {
 					String busquedaTitulo = menu.mostrarMenuBusquedaTitulo();
+					String json = new ConsumoApi(busquedaTitulo).ObtenerJsonBusqueda();
+					System.out.println(json);
 				}
 			}
 
