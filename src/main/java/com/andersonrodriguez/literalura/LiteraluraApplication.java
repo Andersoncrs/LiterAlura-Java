@@ -61,7 +61,12 @@ public class LiteraluraApplication implements CommandLineRunner {
 					menu.mostrarMensajeLibroGuardado(libro);
 				}
 				case 2 ->{
-
+					List<Libro> librosEnLaBaseDeDatos = libroService.listarTodosLosLibros();
+					if(librosEnLaBaseDeDatos.isEmpty()){
+						menu.MostrarLsitaVacia();
+						continue cicloPrincipal;
+					}
+					menu.mostrarLibros(librosEnLaBaseDeDatos);
 				}
 			}
 

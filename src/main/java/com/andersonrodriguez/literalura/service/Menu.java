@@ -2,6 +2,7 @@ package com.andersonrodriguez.literalura.service;
 
 import com.andersonrodriguez.literalura.model.Libro;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.Scanner;
 
@@ -63,11 +64,7 @@ public class Menu {
     public int mostrarLibrosEncontrados(List<DatosLibro> datosLibroList) {
 
         while(true){
-            System.out.println("""
-                    *****************************************************************************************
-                    ********************************** LIBROS ENCONTRADOS ***********************************
-                    *****************************************************************************************
-                    """);
+            mostrarMensajeLibrosEncontrados();
             for (int i = 0; i < datosLibroList.size() ; i++) {
                 System.out.printf("""
                          %d - Titulo: %s, Autores: %s, cantidad de descargas: %s
@@ -88,6 +85,14 @@ public class Menu {
         }
     }
 
+    public void mostrarMensajeLibrosEncontrados(){
+        System.out.println("""
+                    *****************************************************************************************
+                    ********************************** LIBROS ENCONTRADOS ***********************************
+                    *****************************************************************************************
+                    """);
+    }
+
     public void mostrarExistenciaLibro(Libro libro) {
         System.out.printf("""
                 ************************  EL LIBRO YA EXISTE EN LA BASE DE DATOS ************************
@@ -102,5 +107,29 @@ public class Menu {
                 LIBRO: %s
                 *****************************************************************************************
                 """, libro.getTitulo());
+    }
+
+    public void MostrarLsitaVacia() {
+        System.out.println("""
+                *****************************************************************************************
+                No hay ningun libro registrado en la base de datos
+                *****************************************************************************************
+                """);
+    }
+
+    public void mostrarLibros(List<Libro> librosEnLaBaseDeDatos) {
+        System.out.println("""
+                    *****************************************************************************************
+                    ********************************** LIBROS ENCONTRADOS ***********************************
+                    *****************************************************************************************
+                    """);
+        librosEnLaBaseDeDatos.stream()
+                .sorted(Comparator.comparing(Libro::getCantidadDescargas).reversed())
+                .forEach(a -> {
+                    System.out.println("Titulo: " + a.getTitulo());
+                    System.out.println("Cantidad de Descargas:" + a.getCantidadDescargas());
+                    System.out.println("Autores: " + a.getAutorList());
+                    System.out.println("*****************************************************************************************\n");
+                });
     }
 }

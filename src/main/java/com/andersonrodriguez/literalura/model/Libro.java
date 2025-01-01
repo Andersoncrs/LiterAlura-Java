@@ -45,6 +45,10 @@ public class Libro {
         return autorList;
     }
 
+    public int getCantidadDescargas() {
+        return cantidadDescargas;
+    }
+
     public void setAutorList(List<Autor> autorList) {
         this.autorList = autorList;
     }
