@@ -28,7 +28,9 @@ public class Libro {
         this.titulo = titulo;
         this.cantidadDescargas = Integer.parseInt(cantidadDescargas);
         this.autorList = datosAutors.stream().
-                map(a -> new Autor(a.nombre(), Integer.parseInt(a.fechaNacimiento()), Integer.parseInt(a.fechaMuerte())))
+                map(a -> new Autor(a.nombre(),
+                        (a.fechaNacimiento() != null && a.fechaNacimiento().matches("^-?\\d+$")) ? Integer.parseInt(a.fechaNacimiento()) : 0,
+                        (a.fechaMuerte() != null && a.fechaMuerte().matches("^-?\\d+$")) ? Integer.parseInt(a.fechaMuerte()) : 0))
                 .collect(Collectors.toList());
     }
 
