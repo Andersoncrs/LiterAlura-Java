@@ -17,7 +17,16 @@ public class LiteraluraApplication implements CommandLineRunner {
 		Menu menu = new Menu();
 
 		menu.mostrarBienvenida();
-		int opcionIngresada = menu.mostrarMenuPrincipal();
-		System.out.println("Opcion: " + opcionIngresada);
+
+		cicloPrincipal:
+		while(true){
+			int opcionIngresada = menu.mostrarMenuPrincipal();
+			switch (opcionIngresada){
+				case 1 -> {
+					String busquedaTitulo = menu.mostrarMenuBusquedaTitulo();
+				}
+			}
+
+		}
 	}
 }
