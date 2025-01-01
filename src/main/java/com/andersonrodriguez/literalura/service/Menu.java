@@ -1,7 +1,5 @@
 package com.andersonrodriguez.literalura.service;
 
-import jakarta.persistence.criteria.CriteriaBuilder;
-
 import java.util.Scanner;
 
 public class Menu {
