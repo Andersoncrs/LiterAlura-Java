@@ -1,14 +1,11 @@
 package com.andersonrodriguez.literalura;
 
-import com.andersonrodriguez.literalura.service.ConsumoApi;
-import com.andersonrodriguez.literalura.service.ConvierteDatos;
-import com.andersonrodriguez.literalura.service.DatosAPi;
-import com.andersonrodriguez.literalura.service.Menu;
+import com.andersonrodriguez.literalura.service.*;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import javax.swing.plaf.ScrollPaneUI;
+import java.util.List;
 
 @SpringBootApplication
 public class LiteraluraApplication implements CommandLineRunner {
@@ -31,6 +28,16 @@ public class LiteraluraApplication implements CommandLineRunner {
 					String busquedaTitulo = menu.mostrarMenuBusquedaTitulo();
 					String json = new ConsumoApi(busquedaTitulo).ObtenerJsonBusqueda();
 					DatosAPi datosAPi = new ConvierteDatos().obtenerDatos(json, DatosAPi.class);
+					if(datosAPi.comprobarExistenciaResultados()){
+						menu.mostrarResultadoNoEncontrado(busquedaTitulo);
+						continue cicloPrincipal;
+					}
+					List<DatosLibro> datosLibroList = datosAPi.resultados();
+					if(datosLibroList.size() > 20){
+						datosLibroList = datosLibroList.subList(0, 19);
+					}
+
+					//menu.mostrarLibrosEncontrados(datosAPi);
 
 				}
 			}

@@ -1,5 +1,6 @@
 package com.andersonrodriguez.literalura.service;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class Menu {
@@ -47,5 +48,26 @@ public class Menu {
     public String mostrarMenuBusquedaTitulo() {
         System.out.println("Ingrese el titulo que desea Buscar");
         return scanner.nextLine().trim().toLowerCase();
+    }
+
+    public void mostrarResultadoNoEncontrado(String titulo) {
+        System.out.printf("""
+                *****************************************************************************************
+                El Titulo Buscado: "%s" No ha sido encontrado
+                *****************************************************************************************
+                """, titulo);
+    }
+
+    public void mostrarLibrosEncontrados(DatosAPi datosAPi) {
+        List<DatosLibro> resultados  = datosAPi.resultados();
+        for (int i = 0; i < resultados.size() ; i++) {
+            System.out.printf("""
+                     %d - Titulo: %s, Autores: %s, cantidad de descargas: %s
+                     """,
+                    i+1,
+                    resultados.get(i).titulo(),
+                    resultados.get(i).autores(),
+                    resultados.get(i).descargas());
+        }
     }
 }

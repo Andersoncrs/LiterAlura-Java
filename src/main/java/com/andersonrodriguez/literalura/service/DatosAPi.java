@@ -10,5 +10,8 @@ public record DatosAPi(
         @JsonAlias("results")
         List<DatosLibro> resultados
 ) {
+    public boolean comprobarExistenciaResultados(){
+        return this.resultados.isEmpty();
+    }
 
 }
