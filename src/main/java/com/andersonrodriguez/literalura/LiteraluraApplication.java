@@ -37,8 +37,11 @@ public class LiteraluraApplication implements CommandLineRunner {
 						datosLibroList = datosLibroList.subList(0, 20);
 					}
 
-					menu.mostrarLibrosEncontrados(datosLibroList);
-
+					int opcionLibro = menu.mostrarLibrosEncontrados(datosLibroList);
+					if(opcionLibro == 0){
+						continue cicloPrincipal;
+					}
+					System.out.println("Libro seleccionado: " + datosLibroList.get(opcionLibro - 1));
 				}
 			}
 

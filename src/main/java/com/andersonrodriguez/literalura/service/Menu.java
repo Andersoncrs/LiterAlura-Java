@@ -58,15 +58,31 @@ public class Menu {
                 """, titulo);
     }
 
-    public void mostrarLibrosEncontrados(List<DatosLibro> datosLibroList) {
-        for (int i = 0; i < datosLibroList.size() ; i++) {
-            System.out.printf("""
-                     %d - Titulo: %s, Autores: %s, cantidad de descargas: %s
-                     """,
-                    i+1,
-                    datosLibroList.get(i).titulo(),
-                    datosLibroList.get(i).autores(),
-                    datosLibroList.get(i).descargas());
+    public int mostrarLibrosEncontrados(List<DatosLibro> datosLibroList) {
+
+        while(true){
+            System.out.println("""
+                    *****************************************************************************************
+                    ********************************** LIBROS ENCONTRADOS ***********************************
+                    *****************************************************************************************
+                    """);
+            for (int i = 0; i < datosLibroList.size() ; i++) {
+                System.out.printf("""
+                         %d - Titulo: %s, Autores: %s, cantidad de descargas: %s
+                         """,
+                        i+1,
+                        datosLibroList.get(i).titulo(),
+                        datosLibroList.get(i).autores(),
+                        datosLibroList.get(i).descargas());
+            }
+            System.out.println("\n0 - Volver al menu principal");
+            System.out.println("\nIngrese el numero correspondiente al libro que desea añadir a la base de datos");
+            String opcionIngresada = scanner.nextLine();
+            if(Validacion.validarIngresoMenu(opcionIngresada, datosLibroList.size())){
+                mostarErrorIngresoDatos();
+                continue;
+            }
+            return Integer.parseInt(opcionIngresada);
         }
     }
 }
