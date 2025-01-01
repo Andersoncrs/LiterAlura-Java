@@ -60,6 +60,9 @@ public class LiteraluraApplication implements CommandLineRunner {
 					libroService.AgregarLibro(libro);
 					menu.mostrarMensajeLibroGuardado(libro);
 				}
+				case 2 ->{
+
+				}
 			}
 
 		}
