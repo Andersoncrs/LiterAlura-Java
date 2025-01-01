@@ -58,16 +58,15 @@ public class Menu {
                 """, titulo);
     }
 
-    public void mostrarLibrosEncontrados(DatosAPi datosAPi) {
-        List<DatosLibro> resultados  = datosAPi.resultados();
-        for (int i = 0; i < resultados.size() ; i++) {
+    public void mostrarLibrosEncontrados(List<DatosLibro> datosLibroList) {
+        for (int i = 0; i < datosLibroList.size() ; i++) {
             System.out.printf("""
                      %d - Titulo: %s, Autores: %s, cantidad de descargas: %s
                      """,
                     i+1,
-                    resultados.get(i).titulo(),
-                    resultados.get(i).autores(),
-                    resultados.get(i).descargas());
+                    datosLibroList.get(i).titulo(),
+                    datosLibroList.get(i).autores(),
+                    datosLibroList.get(i).descargas());
         }
     }
 }

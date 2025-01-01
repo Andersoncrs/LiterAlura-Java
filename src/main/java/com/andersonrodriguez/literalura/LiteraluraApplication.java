@@ -34,10 +34,10 @@ public class LiteraluraApplication implements CommandLineRunner {
 					}
 					List<DatosLibro> datosLibroList = datosAPi.resultados();
 					if(datosLibroList.size() > 20){
-						datosLibroList = datosLibroList.subList(0, 19);
+						datosLibroList = datosLibroList.subList(0, 20);
 					}
 
-					//menu.mostrarLibrosEncontrados(datosAPi);
+					menu.mostrarLibrosEncontrados(datosLibroList);
 
 				}
 			}
