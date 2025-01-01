@@ -1,5 +1,7 @@
 package com.andersonrodriguez.literalura.service;
 
+import com.andersonrodriguez.literalura.model.Libro;
+
 import java.util.List;
 import java.util.Scanner;
 
@@ -84,5 +86,21 @@ public class Menu {
             }
             return Integer.parseInt(opcionIngresada);
         }
+    }
+
+    public void mostrarExistenciaLibro(Libro libro) {
+        System.out.printf("""
+                ************************  EL LIBRO YA EXISTE EN LA BASE DE DATOS ************************
+                libro: %s
+                *****************************************************************************************
+                """, libro.getTitulo());
+    }
+
+    public void mostrarMensajeLibroGuardado(Libro libro) {
+        System.out.printf("""
+                ******************************* LIBRO GUARDADO CON EXITO ********************************
+                LIBRO: %s
+                *****************************************************************************************
+                """, libro.getTitulo());
     }
 }

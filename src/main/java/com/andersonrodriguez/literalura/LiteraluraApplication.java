@@ -1,6 +1,9 @@
 package com.andersonrodriguez.literalura;
 
+import com.andersonrodriguez.literalura.model.Libro;
+import com.andersonrodriguez.literalura.repository.LibroRepository;
 import com.andersonrodriguez.literalura.service.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -13,6 +16,12 @@ public class LiteraluraApplication implements CommandLineRunner {
 	public static void main(String[] args) {
 		SpringApplication.run(LiteraluraApplication.class, args);
 	}
+
+	@Autowired
+	LibroService libroService;
+
+	@Autowired
+	AutorService autorService;
 
 	@Override
 	public void run(String... args) throws Exception {
@@ -41,7 +50,15 @@ public class LiteraluraApplication implements CommandLineRunner {
 					if(opcionLibro == 0){
 						continue cicloPrincipal;
 					}
-					System.out.println("Libro seleccionado: " + datosLibroList.get(opcionLibro - 1));
+					DatosLibro datosLibro = datosLibroList.get(opcionLibro - 1);
+					Libro libro = new Libro(datosLibro.titulo(), datosLibro.descargas(), datosLibro.autores());
+					libro.setAutorList(autorService.comprobarExistenciaAutores(libro));
+					if(libroService.comprobarExistenciaLibro(libro)){
+						menu.mostrarExistenciaLibro(libro);
+						continue cicloPrincipal;
+					}
+					libroService.AgregarLibro(libro);
+					menu.mostrarMensajeLibroGuardado(libro);
 				}
 			}
 

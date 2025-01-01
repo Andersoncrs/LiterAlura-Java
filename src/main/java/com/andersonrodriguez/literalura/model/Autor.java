@@ -15,6 +15,19 @@ public class Autor {
     private int fechaNacimiento;
     private int fechaMuerte;
 
-    @ManyToMany(mappedBy = "autorList")
+    @ManyToMany(mappedBy = "autorList", cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
     private List<Libro> libroList;
+
+    public Autor(String nombre, int fechaNacimiento, int fechaMuerte) {
+        this.nombre = nombre;
+        this.fechaNacimiento = fechaNacimiento;
+        this.fechaMuerte = fechaMuerte;
+    }
+
+    public Autor() {
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
 }
