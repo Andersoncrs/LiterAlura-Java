@@ -1,7 +1,7 @@
 package com.andersonrodriguez.literalura;
 
+import com.andersonrodriguez.literalura.model.Autor;
 import com.andersonrodriguez.literalura.model.Libro;
-import com.andersonrodriguez.literalura.repository.LibroRepository;
 import com.andersonrodriguez.literalura.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -63,10 +63,18 @@ public class LiteraluraApplication implements CommandLineRunner {
 				case 2 ->{
 					List<Libro> librosEnLaBaseDeDatos = libroService.listarTodosLosLibros();
 					if(librosEnLaBaseDeDatos.isEmpty()){
-						menu.MostrarLsitaVacia();
+						menu.MostrarListaVacia("Libro");
 						continue cicloPrincipal;
 					}
 					menu.mostrarLibros(librosEnLaBaseDeDatos);
+				}
+				case 3 -> {
+					List<Autor> autoresEnLaBaseDeDatos = autorService.listarTodosLosAutores();
+					if(autoresEnLaBaseDeDatos.isEmpty()){
+						menu.MostrarListaVacia("Autor");
+						continue cicloPrincipal;
+					}
+					menu.mostrarAutores(autoresEnLaBaseDeDatos);
 				}
 			}
 

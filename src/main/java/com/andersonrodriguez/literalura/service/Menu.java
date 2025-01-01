@@ -1,5 +1,6 @@
 package com.andersonrodriguez.literalura.service;
 
+import com.andersonrodriguez.literalura.model.Autor;
 import com.andersonrodriguez.literalura.model.Libro;
 
 import java.util.Comparator;
@@ -64,7 +65,7 @@ public class Menu {
     public int mostrarLibrosEncontrados(List<DatosLibro> datosLibroList) {
 
         while(true){
-            mostrarMensajeLibrosEncontrados();
+            mostrarMensajeRegistrosEncontrados("LIBROS");
             for (int i = 0; i < datosLibroList.size() ; i++) {
                 System.out.printf("""
                          %d - Titulo: %s, Autores: %s, cantidad de descargas: %s
@@ -85,12 +86,12 @@ public class Menu {
         }
     }
 
-    public void mostrarMensajeLibrosEncontrados(){
-        System.out.println("""
+    public void mostrarMensajeRegistrosEncontrados(String tipoLista){
+        System.out.printf("""
                     *****************************************************************************************
-                    ********************************** LIBROS ENCONTRADOS ***********************************
+                    ********************************** %s ENCONTRADOS ***********************************
                     *****************************************************************************************
-                    """);
+                    """, tipoLista);
     }
 
     public void mostrarExistenciaLibro(Libro libro) {
@@ -109,20 +110,16 @@ public class Menu {
                 """, libro.getTitulo());
     }
 
-    public void MostrarLsitaVacia() {
-        System.out.println("""
+    public void MostrarListaVacia(String tipoLista) {
+        System.out.printf("""
                 *****************************************************************************************
-                No hay ningun libro registrado en la base de datos
+                No hay ningun %s registrado en la base de datos
                 *****************************************************************************************
-                """);
+                """, tipoLista);
     }
 
     public void mostrarLibros(List<Libro> librosEnLaBaseDeDatos) {
-        System.out.println("""
-                    *****************************************************************************************
-                    ********************************** LIBROS ENCONTRADOS ***********************************
-                    *****************************************************************************************
-                    """);
+        mostrarMensajeRegistrosEncontrados("LIBROS");
         librosEnLaBaseDeDatos.stream()
                 .sorted(Comparator.comparing(Libro::getCantidadDescargas).reversed())
                 .forEach(a -> {
@@ -130,6 +127,21 @@ public class Menu {
                     System.out.println("Cantidad de Descargas:" + a.getCantidadDescargas());
                     System.out.println("Autores: " + a.getAutorList());
                     System.out.println("*****************************************************************************************\n");
+                });
+    }
+
+    public void mostrarAutores(List<Autor> autoresEnLaBaseDeDatos) {
+        mostrarMensajeRegistrosEncontrados("AUTORES");
+        autoresEnLaBaseDeDatos.stream()
+                .sorted(Comparator.comparing(Autor::getNombre))
+                .forEach(a -> {
+                    System.out.println("Nombre: " + a.getNombre());
+                    System.out.println("Fecha de Nacimiento: " +
+                            ((a.getFechaNacimiento()==0) ? "No Determinada" : a.getFechaNacimiento()));
+                    System.out.println("Fecha de Muerte: " +
+                            ((a.getFechaMuerte()== 0) ? "No Determinada" : a.getFechaMuerte()));
+                    System.out.println("*****************************************************************************************\n");
+
                 });
     }
 }

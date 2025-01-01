@@ -30,4 +30,17 @@ public class Autor {
     public String getNombre() {
         return nombre;
     }
+
+    public int getFechaNacimiento() {
+        return fechaNacimiento;
+    }
+
+    public int getFechaMuerte() {
+        return fechaMuerte;
+    }
+
+    @Override
+    public String toString() {
+        return "nombre= " + nombre + ", fechaNacimiento= " + fechaNacimiento + ", fechaMuerte= " + fechaMuerte;
+    }
 }

@@ -29,4 +29,8 @@ public class AutorService {
         }
         return autorList;
     }
+
+    public List<Autor> listarTodosLosAutores(){
+        return autorRepository.findAll();
+    }
 }
