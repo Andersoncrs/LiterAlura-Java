@@ -52,4 +52,9 @@ public class Libro {
     public void setAutorList(List<Autor> autorList) {
         this.autorList = autorList;
     }
+
+    @Override
+    public String toString() {
+        return "\"" + titulo + "\"";
+    }
 }

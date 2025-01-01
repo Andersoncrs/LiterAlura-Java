@@ -140,6 +140,7 @@ public class Menu {
                             ((a.getFechaNacimiento()==0) ? "No Determinada" : a.getFechaNacimiento()));
                     System.out.println("Fecha de Muerte: " +
                             ((a.getFechaMuerte()== 0) ? "No Determinada" : a.getFechaMuerte()));
+                    System.out.println("Libros: " + a.getLibroList());
                     System.out.println("*****************************************************************************************\n");
 
                 });

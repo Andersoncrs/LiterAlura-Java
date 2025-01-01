@@ -39,8 +39,12 @@ public class Autor {
         return fechaMuerte;
     }
 
+    public List<Libro> getLibroList() {
+        return libroList;
+    }
+
     @Override
     public String toString() {
-        return "nombre= " + nombre + ", fechaNacimiento= " + fechaNacimiento + ", fechaMuerte= " + fechaMuerte;
+        return "\"" + nombre + "\"";
     }
 }
