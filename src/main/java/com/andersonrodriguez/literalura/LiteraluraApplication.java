@@ -76,6 +76,15 @@ public class LiteraluraApplication implements CommandLineRunner {
 					}
 					menu.mostrarAutores(autoresEnLaBaseDeDatos);
 				}
+				case 4 ->{
+					int fechaIngresada = menu.solicitarFechaIngreso();
+					List<Autor> autorList = autorService.BuscarAutoresVivosPorFecha(fechaIngresada);
+					if(autorList.isEmpty()){
+						menu.mostrarFechaNoEncontrada(fechaIngresada);
+						continue cicloPrincipal;
+					}
+					menu.mostrarAutores(autorList);
+				}
 			}
 
 		}

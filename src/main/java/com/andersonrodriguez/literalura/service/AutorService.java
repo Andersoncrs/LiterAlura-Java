@@ -33,4 +33,8 @@ public class AutorService {
     public List<Autor> listarTodosLosAutores(){
         return autorRepository.findAll();
     }
+
+    public List<Autor> BuscarAutoresVivosPorFecha(int fechaIngresada){
+        return autorRepository.BuscarAutoresVivosPorFecha(fechaIngresada);
+    }
 }

@@ -145,4 +145,22 @@ public class Menu {
 
                 });
     }
+
+    public int solicitarFechaIngreso() {
+        while(true){
+            System.out.println("Por favor ingrese la Fecha que desea consultar");
+            String ingresoUsuario = scanner.nextLine().trim();
+            if(Validacion.validarNumeroEntero(ingresoUsuario)) {
+                return Integer.parseInt(ingresoUsuario);
+            }
+        }
+    }
+
+    public void mostrarFechaNoEncontrada(int fechaIngresada) {
+        System.out.printf("""
+                *****************************************************************************************
+                No existe un Autor vivo en la fecha %d dentro de la base de datos
+                *****************************************************************************************
+                """, fechaIngresada);
+    }
 }
