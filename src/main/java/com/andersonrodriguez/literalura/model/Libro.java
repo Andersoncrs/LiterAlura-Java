@@ -13,8 +13,8 @@ public class Libro {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    String titulo;
-    int cantidadDescargas;
+    private String titulo;
+    private int cantidadDescargas;
 
     @ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
     @JoinTable(
@@ -22,15 +22,27 @@ public class Libro {
             joinColumns = @JoinColumn(name = "libro_id"),
             inverseJoinColumns = @JoinColumn(name = "autor_id")
     )
-    List<Autor> autorList;
+    private List<Autor> autorList;
 
-    public Libro(String titulo, String cantidadDescargas, List<DatosAutor> datosAutors) {
+    @ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "libro_idioma",
+            joinColumns = @JoinColumn(name= "libro_id"),
+            inverseJoinColumns = @JoinColumn(name = "idioma_id")
+    )
+    private List<Idioma> idiomaList;
+
+
+    public Libro(String titulo, String cantidadDescargas, List<DatosAutor> datosAutors , List<String> stringList) {
         this.titulo = titulo;
         this.cantidadDescargas = Integer.parseInt(cantidadDescargas);
         this.autorList = datosAutors.stream().
                 map(a -> new Autor(a.nombre(),
                         (a.fechaNacimiento() != null && a.fechaNacimiento().matches("^-?\\d+$")) ? Integer.parseInt(a.fechaNacimiento()) : 0,
                         (a.fechaMuerte() != null && a.fechaMuerte().matches("^-?\\d+$")) ? Integer.parseInt(a.fechaMuerte()) : 0))
+                .collect(Collectors.toList());
+        this.idiomaList = stringList.stream()
+                .map(Idioma::new)
                 .collect(Collectors.toList());
     }
 
@@ -51,6 +63,14 @@ public class Libro {
 
     public void setAutorList(List<Autor> autorList) {
         this.autorList = autorList;
+    }
+
+    public List<Idioma> getIdiomaList() {
+        return idiomaList;
+    }
+
+    public void setIdiomaList(List<Idioma> idiomaList) {
+        this.idiomaList = idiomaList;
     }
 
     @Override

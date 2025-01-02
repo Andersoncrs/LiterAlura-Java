@@ -23,6 +23,9 @@ public class LiteraluraApplication implements CommandLineRunner {
 	@Autowired
 	AutorService autorService;
 
+	@Autowired
+	IdiomaService idiomaService;
+
 	@Override
 	public void run(String... args) throws Exception {
 		Menu menu = new Menu();
@@ -51,8 +54,14 @@ public class LiteraluraApplication implements CommandLineRunner {
 						continue cicloPrincipal;
 					}
 					DatosLibro datosLibro = datosLibroList.get(opcionLibro - 1);
-					Libro libro = new Libro(datosLibro.titulo(), datosLibro.descargas(), datosLibro.autores());
+					Libro libro = new Libro(
+							datosLibro.titulo(),
+							datosLibro.descargas(),
+							datosLibro.autores(),
+							datosLibro.idiomas()
+					);
 					libro.setAutorList(autorService.comprobarExistenciaAutores(libro));
+					libro.setIdiomaList(idiomaService.comprobarExistenciaIdiomas(libro));
 					if(libroService.comprobarExistenciaLibro(libro)){
 						menu.mostrarExistenciaLibro(libro);
 						continue cicloPrincipal;
