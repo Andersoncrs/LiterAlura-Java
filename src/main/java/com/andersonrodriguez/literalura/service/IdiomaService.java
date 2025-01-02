@@ -31,4 +31,8 @@ public class IdiomaService {
         }
         return idiomaList;
     }
+
+    public  List<Idioma> listarIdiomasDisponibles(){
+        return idiomaRepository.findAll();
+    }
 }

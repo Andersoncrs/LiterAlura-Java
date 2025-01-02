@@ -1,6 +1,7 @@
 package com.andersonrodriguez.literalura.service;
 
 import com.andersonrodriguez.literalura.model.Autor;
+import com.andersonrodriguez.literalura.model.Idioma;
 import com.andersonrodriguez.literalura.model.Libro;
 
 import java.util.Comparator;
@@ -34,14 +35,14 @@ public class Menu {
                     """);
             String opcionIngresada = scanner.nextLine().trim();
             if(Validacion.validarIngresoMenu(opcionIngresada, 5)){
-                mostarErrorIngresoDatos();
+                mostrarErrorIngresoDatos();
                 continue;
             }
             return Integer.parseInt(opcionIngresada);
         }
     }
 
-    private void mostarErrorIngresoDatos(){
+    private void mostrarErrorIngresoDatos(){
         System.out.println("""
                 *****************************************************************************************
                 Error: Ha ingresado un valor invalido. Intentelo de Nuevo Por favor
@@ -68,18 +69,20 @@ public class Menu {
             mostrarMensajeRegistrosEncontrados("LIBROS");
             for (int i = 0; i < datosLibroList.size() ; i++) {
                 System.out.printf("""
-                         %d - Titulo: %s, Autores: %s, cantidad de descargas: %s
+                         %d - Titulo: %s, cantidad de descargas: %s, Idiomas: %s, Autores: %s
                          """,
                         i+1,
                         datosLibroList.get(i).titulo(),
-                        datosLibroList.get(i).autores(),
-                        datosLibroList.get(i).descargas());
+                        datosLibroList.get(i).descargas(),
+                        datosLibroList.get(i).idiomas(),
+                        datosLibroList.get(i).autores()
+                        );
             }
             System.out.println("\n0 - Volver al menu principal");
             System.out.println("\nIngrese el numero correspondiente al libro que desea añadir a la base de datos");
             String opcionIngresada = scanner.nextLine();
             if(Validacion.validarIngresoMenu(opcionIngresada, datosLibroList.size())){
-                mostarErrorIngresoDatos();
+                mostrarErrorIngresoDatos();
                 continue;
             }
             return Integer.parseInt(opcionIngresada);
@@ -110,7 +113,7 @@ public class Menu {
                 """, libro.getTitulo());
     }
 
-    public void MostrarListaVacia(String tipoLista) {
+    public void mostrarListaVacia(String tipoLista) {
         System.out.printf("""
                 *****************************************************************************************
                 No hay ningun %s registrado en la base de datos
@@ -124,6 +127,7 @@ public class Menu {
                 .sorted(Comparator.comparing(Libro::getCantidadDescargas).reversed())
                 .forEach(a -> {
                     System.out.println("Titulo: " + a.getTitulo());
+                    System.out.println("Idiomas: " + a.getIdiomaList());
                     System.out.println("Cantidad de Descargas:" + a.getCantidadDescargas());
                     System.out.println("Autores: " + a.getAutorList());
                     System.out.println("*****************************************************************************************\n");
@@ -153,6 +157,7 @@ public class Menu {
             if(Validacion.validarNumeroEntero(ingresoUsuario)) {
                 return Integer.parseInt(ingresoUsuario);
             }
+            mostrarErrorIngresoDatos();
         }
     }
 
@@ -162,5 +167,35 @@ public class Menu {
                 No existe un Autor vivo en la fecha %d dentro de la base de datos
                 *****************************************************************************************
                 """, fechaIngresada);
+    }
+
+    public int mostrarIdiomasDisponibles(List<Idioma> idiomasDisponibles) {
+        while(true){
+            mostrarMensajeRegistrosEncontrados("IDIOMAS");
+            for (int i = 0; i <idiomasDisponibles.size(); i++) {
+                System.out.println(i + 1 + " - " + idiomasDisponibles.get(i).getIdioma());
+            }
+            System.out.println("\n0 - Volver al menu principal");
+            System.out.println("\nIngrese el numero correspondiente al idioma que desea consultar");
+            String opcionIngresada = scanner.nextLine();
+            if(Validacion.validarIngresoMenu(opcionIngresada, idiomasDisponibles.size())){
+                mostrarErrorIngresoDatos();
+                continue;
+            }
+            return Integer.parseInt(opcionIngresada);
+        }
+    }
+
+    public void MostrarDespedida() {
+        System.out.println("""
+                
+                *****************************************************************************************
+                ************************ GRACIAS POR UTILIZAR NUESTROS SERVICIOS ************************
+                ************************************** LITERALURA ***************************************
+                *****************************************************************************************
+                *************************** REALIZADO POR ANDERSON RODRIGUEZ ****************************
+                *****************************************************************************************
+                
+                """);
     }
 }

@@ -1,6 +1,7 @@
 package com.andersonrodriguez.literalura;
 
 import com.andersonrodriguez.literalura.model.Autor;
+import com.andersonrodriguez.literalura.model.Idioma;
 import com.andersonrodriguez.literalura.model.Libro;
 import com.andersonrodriguez.literalura.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -72,7 +73,7 @@ public class LiteraluraApplication implements CommandLineRunner {
 				case 2 ->{
 					List<Libro> librosEnLaBaseDeDatos = libroService.listarTodosLosLibros();
 					if(librosEnLaBaseDeDatos.isEmpty()){
-						menu.MostrarListaVacia("Libro");
+						menu.mostrarListaVacia("Libro");
 						continue cicloPrincipal;
 					}
 					menu.mostrarLibros(librosEnLaBaseDeDatos);
@@ -80,7 +81,7 @@ public class LiteraluraApplication implements CommandLineRunner {
 				case 3 -> {
 					List<Autor> autoresEnLaBaseDeDatos = autorService.listarTodosLosAutores();
 					if(autoresEnLaBaseDeDatos.isEmpty()){
-						menu.MostrarListaVacia("Autor");
+						menu.mostrarListaVacia("Autor");
 						continue cicloPrincipal;
 					}
 					menu.mostrarAutores(autoresEnLaBaseDeDatos);
@@ -93,6 +94,22 @@ public class LiteraluraApplication implements CommandLineRunner {
 						continue cicloPrincipal;
 					}
 					menu.mostrarAutores(autorList);
+				}
+				case 5 -> {
+					List<Idioma> idiomasDisponibles = idiomaService.listarIdiomasDisponibles();
+					if(idiomasDisponibles.isEmpty()) {
+						menu.mostrarListaVacia("Idioma");
+						continue cicloPrincipal;
+					}
+					int idiomaSeleccionado = menu.mostrarIdiomasDisponibles(idiomasDisponibles);
+					if(idiomaSeleccionado == 0){
+						continue cicloPrincipal;
+					}
+					menu.mostrarLibros(idiomasDisponibles.get(idiomaSeleccionado - 1).getLibroList());
+				}
+				case 0 -> {
+					menu.MostrarDespedida();
+					break cicloPrincipal;
 				}
 			}
 

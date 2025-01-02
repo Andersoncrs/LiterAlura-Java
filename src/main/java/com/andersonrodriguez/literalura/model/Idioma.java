@@ -26,4 +26,13 @@ public class Idioma {
     public String getIdioma() {
         return idioma;
     }
+
+    public List<Libro> getLibroList() {
+        return libroList;
+    }
+
+    @Override
+    public String toString() {
+        return "\"" + idioma + "\"";
+    }
 }
