@@ -14,17 +14,11 @@ public record DatosAutor(
         @JsonAlias("death_year")
         String fechaMuerte
 ) {
-    public String comprobarFechaNacimiento(){
-        if(fechaNacimiento.equalsIgnoreCase("null")){
-            return "0";
-        }
-        return fechaNacimiento;
-    }
 
     @Override
     public String toString() {
         return "nombre: " + nombre +
-               ", fecha nacimiento: " + fechaNacimiento +
-               ", fecha de Muerte: " + fechaMuerte;
+                ", fecha nacimiento: " + fechaNacimiento +
+                ", fecha de Muerte: " + fechaMuerte;
     }
 }

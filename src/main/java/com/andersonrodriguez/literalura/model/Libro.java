@@ -27,13 +27,13 @@ public class Libro {
     @ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
     @JoinTable(
             name = "libro_idioma",
-            joinColumns = @JoinColumn(name= "libro_id"),
+            joinColumns = @JoinColumn(name = "libro_id"),
             inverseJoinColumns = @JoinColumn(name = "idioma_id")
     )
     private List<Idioma> idiomaList;
 
 
-    public Libro(String titulo, String cantidadDescargas, List<DatosAutor> datosAutors , List<String> stringList) {
+    public Libro(String titulo, String cantidadDescargas, List<DatosAutor> datosAutors, List<String> stringList) {
         this.titulo = titulo;
         this.cantidadDescargas = Integer.parseInt(cantidadDescargas);
         this.autorList = datosAutors.stream().

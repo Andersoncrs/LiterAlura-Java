@@ -19,13 +19,13 @@ public class LiteraluraApplication implements CommandLineRunner {
     }
 
     @Autowired
-    LibroService libroService;
+    private LibroService libroService;
 
     @Autowired
-    AutorService autorService;
+    private AutorService autorService;
 
     @Autowired
-    IdiomaService idiomaService;
+    private IdiomaService idiomaService;
 
     @Override
     public void run(String... args) throws Exception {

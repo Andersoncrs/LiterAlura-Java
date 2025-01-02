@@ -15,13 +15,13 @@ import java.util.Optional;
 public class IdiomaService {
 
     @Autowired
-    IdiomaRepository idiomaRepository;
+    private IdiomaRepository idiomaRepository;
 
-    public List<Idioma> comprobarExistenciaIdiomas(Libro libro){
+    public List<Idioma> comprobarExistenciaIdiomas(Libro libro) {
         List<Idioma> idiomaList = new ArrayList<>();
         for (Idioma idioma : libro.getIdiomaList()) {
             Optional<Idioma> busquedaIdioma = idiomaRepository.findByIdioma(idioma.getIdioma());
-            if(busquedaIdioma.isPresent()){
+            if (busquedaIdioma.isPresent()) {
                 idiomaList.add((busquedaIdioma.get()));
             } else {
                 idiomaRepository.save(idioma);
@@ -32,7 +32,7 @@ public class IdiomaService {
         return idiomaList;
     }
 
-    public  List<Idioma> listarIdiomasDisponibles(){
+    public List<Idioma> listarIdiomasDisponibles() {
         return idiomaRepository.findAll();
     }
 }

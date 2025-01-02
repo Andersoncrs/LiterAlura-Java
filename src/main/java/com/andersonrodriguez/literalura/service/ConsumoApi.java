@@ -6,14 +6,16 @@ import java.net.URLEncoder;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.nio.charset.StandardCharsets;
 
 public class ConsumoApi {
-    private String titulo;
+    private final String titulo;
 
     public ConsumoApi(String titulo) {
-        this.titulo = URLEncoder.encode(titulo);
+        this.titulo = URLEncoder.encode(titulo, StandardCharsets.UTF_8);
     }
-    public String ObtenerJsonBusqueda(){
+
+    public String ObtenerJsonBusqueda() {
         String URL_BASE = "https://gutendex.com/books/?search=%20";
         HttpRequest request = HttpRequest.newBuilder().
                 uri(URI.create(URL_BASE + this.titulo)).

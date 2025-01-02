@@ -12,21 +12,18 @@ import java.util.Optional;
 public class LibroService {
 
     @Autowired
-    LibroRepository libroRepository;
+    private LibroRepository libroRepository;
 
-    public void AgregarLibro(Libro libro){
+    public void AgregarLibro(Libro libro) {
         libroRepository.save(libro);
     }
 
-    public boolean comprobarExistenciaLibro(Libro libro){
+    public boolean comprobarExistenciaLibro(Libro libro) {
         Optional<Libro> librobuscado = libroRepository.findByTitulo(libro.getTitulo());
-        if(librobuscado.isPresent()){
-            return true;
-        }
-        return false;
+        return librobuscado.isPresent();
     }
 
-    public List<Libro> listarTodosLosLibros(){
+    public List<Libro> listarTodosLosLibros() {
         return libroRepository.findAll();
     }
 }

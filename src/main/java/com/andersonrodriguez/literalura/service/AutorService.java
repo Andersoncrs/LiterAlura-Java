@@ -14,13 +14,13 @@ import java.util.Optional;
 public class AutorService {
 
     @Autowired
-    AutorRepository autorRepository;
+    private AutorRepository autorRepository;
 
-    public List<Autor> comprobarExistenciaAutores(Libro libro){
+    public List<Autor> comprobarExistenciaAutores(Libro libro) {
         List<Autor> autorList = new ArrayList<>();
         for (Autor autor : libro.getAutorList()) {
-            Optional<Autor> busquedaAutor =  autorRepository.findByNombre(autor.getNombre());
-            if(busquedaAutor.isPresent()){
+            Optional<Autor> busquedaAutor = autorRepository.findByNombre(autor.getNombre());
+            if (busquedaAutor.isPresent()) {
                 autorList.add(busquedaAutor.get());
             } else {
                 autorRepository.save(autor);
@@ -30,11 +30,11 @@ public class AutorService {
         return autorList;
     }
 
-    public List<Autor> listarTodosLosAutores(){
+    public List<Autor> listarTodosLosAutores() {
         return autorRepository.findAll();
     }
 
-    public List<Autor> BuscarAutoresVivosPorFecha(int fechaIngresada){
+    public List<Autor> BuscarAutoresVivosPorFecha(int fechaIngresada) {
         return autorRepository.BuscarAutoresVivosPorFecha(fechaIngresada);
     }
 }
